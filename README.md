@@ -10,9 +10,9 @@ It's a very simple script tha requires the *aircrack-ng* suite to be installed.
 
     $ git clone https://github.com/W00t3k/airodump-maclookup
     $ cd airodump-maclookup
-    $ pip install -r requirements.txt
+    $ pip3 install -r requirements.txt
   
  ## Usage
  
-    $ ./airodump-maclookp
+    $ python3 airodump-maclookup.py
  
