@@ -1,6 +1,6 @@
 # Airodump-maclookup
 
-A Python 3 tool that parses airodump-ng csv files, and finds the client’s (Station's) vendor or company name by checking it's MAC addresss ranges.
+A Python 3 tool that parses airodump-ng csv files, and finds the client’s (Station's) vendor or company name by checking it's MAC address’s ranges.
 
 ## Simplicity
 
