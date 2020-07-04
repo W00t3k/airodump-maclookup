@@ -4,7 +4,7 @@ A Python 3 tool that parses airodump-ng csv files, and finds the client’s (Sta
 
 ## Simplicity
 
-It's a very simple script tha requires the *aircrack-ng* suite to be installed. 
+It's a very simple script tha requires the *aircrack-ng* suite to be installed. After installing the aircrack-ng suite, and capturing the required data
 
 # Installation
 
@@ -14,5 +14,5 @@ It's a very simple script tha requires the *aircrack-ng* suite to be installed.
   
  ## Usage
  
+    $ airodump-ng wlan1mon --bssid  00:00:00:00:00:00 -c 6 --output-format csv -w filename
     $ python3 airodump-maclookup.py
- 
