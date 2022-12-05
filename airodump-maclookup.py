@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Bug fixes
+
 import pandas as pd
 import logging
 import sys
@@ -34,11 +36,16 @@ while True:
         print ('[+]' '  ' "File Exists!!! " + filename)
         colnames = ['Station MAC', 'First time seen', 'Last time seen', 'Power', '# packets', 'BSSID', 'Probed ESSIDs']
         colnames2 = ['BSSID', 'First time seen', 'Last time seen', 'channel', 'Speed', 'Privacy', 'Cipher', 'Authentication', 'Power', '# beacons', '# IV', 'LAN IP', 'ID-length', 'ESSID', 'Key']
-        df = pd.read_csv(f'{filename}', names=colnames, skip_blank_lines=True, header=None, skipinitialspace=0, engine='python', dtype=str, skiprows=5, usecols=range(1))
-        df2 = pd.read_csv(f'{filename}', names=colnames2, skip_blank_lines=True, header=None, skipinitialspace=0, engine='python', skiprows=2, usecols=range(15),nrows=1)
-        df3 = pd.read_csv(f'{filename}', names=colnames2, skip_blank_lines=True, header=None, skipinitialspace=0, engine='python', skiprows=2, usecols=range(6),nrows=1)
-        df4 = pd.read_csv(f'{filename}', names=colnames2, skip_blank_lines=True, header=None, skipinitialspace=0, engine='python', skiprows=2, usecols=range(8),nrows=1)
-        df5 = pd.read_csv(f'{filename}', names=colnames, skip_blank_lines=True, header=None, skipinitialspace=0, engine='python', dtype=str, skiprows=5, usecols=range(7)).dropna().drop_duplicates("Probed ESSIDs")
+        df = pd.read_csv(f'{filename}', names=colnames, skip_blank_lines=True, header=None, skipinitialspace=0, engine='python', dtype=str,
+skiprows=5, usecols=range(1))
+        df2 = pd.read_csv(f'{filename}', names=colnames2, skip_blank_lines=True, header=None, skipinitialspace=0, engine='python', skiprows=2,
+usecols=range(15),nrows=1)
+        df3 = pd.read_csv(f'{filename}', names=colnames2, skip_blank_lines=True, header=None, skipinitialspace=0, engine='python', skiprows=2,
+usecols=range(6),nrows=1)
+        df4 = pd.read_csv(f'{filename}', names=colnames2, skip_blank_lines=True, header=None, skipinitialspace=0, engine='python', skiprows=2,
+usecols=range(8),nrows=1)
+        df5 = pd.read_csv(f'{filename}', names=colnames, skip_blank_lines=True, header=None, skipinitialspace=0, engine='python', dtype=str,
+skiprows=5, usecols=range(7)).dropna().drop_duplicates("Probed ESSIDs")
         df6 = pd.read_csv(f'{filename}', names=colnames, skiprows=14, usecols=range(7)).dropna().drop_duplicates("Probed ESSIDs")
         # Set to True, to refresh the MAC address DB
         p = manuf.MacParser(update=False)
@@ -56,11 +63,23 @@ while True:
                     print(Fore.RED + series["Authentication"])
                     print('\n'*0)
                     print("Clients on network and corresponding MAC Addresses:")
-                    print('\n'*0)     
+                    print('\n'*0)
                     for row, series in df.iterrows():
-                        print(p.get_manuf_long(series["Station MAC"]), "Client MAC =",Fore.RED + (series["Station MAC"]))    
+                        print(p.get_manuf_long(series["Station MAC"]), "Client MAC =",Fore.RED + (series["Station MAC"]))
     for row, series in df5.iterrows():
         print('\n'*0)
         print("Client ESSID Probes:")
         print(Fore.RED + series["Probed ESSIDs"])
-    
+    for row, series in df6.iterrows():
+        print('\n'*0)
+        print("Client ESSID Probes:")
+        print(Fore.RED + series["Probed ESSIDs"])
+    print('\n'*0)
+    print("Would you like to parse another airodump-ng .csv file?")
+    print("Type 'y' for yes or 'n' for no.")
+    answer = input("Type 'y' or 'n': ")
+    if answer == "y":
+        print('\n'*0)
+        print("Please enter the name of the airodump-ng .csv file you would like to parse.")
+        print("Example: airodump-ng-01.csv")
+         print("'\n'*")
